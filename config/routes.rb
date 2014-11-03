@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   root 'static_pages#home'
-
+  resources :cars
   # get http://api.myapp.com/v1/cars
   # constraints :subdomain => 'api' do
   #   namespace :api, path: nil, defaults: { format: 'json' } do
@@ -11,13 +11,13 @@ Rails.application.routes.draw do
   # end
 
   # get http://api.myapp.com/v1/events/
-  constraints subdomain: 'api' do
-    scope module: 'api' do
-      namespace :v1 do
-        resources :events
-      end
-    end
-  end
+  # constraints subdomain: 'api' do
+  #   scope module: 'api' do
+  #     namespace :v1 do
+  #       resources :events
+  #     end
+  #   end
+  # end
 
   # controller should be ..
 #   app/controllers/
@@ -33,7 +33,7 @@ Rails.application.routes.draw do
 #   class ApiController < ApplicationController
 #     # Generic API stuff here
 #   end
-# end  
+# end
 
 # app/controllers/api/v1/events_controller.rb
 # module Api::V1
@@ -46,7 +46,7 @@ Rails.application.routes.draw do
 # end
 
 
-  
+
 
 
   # The priority is based upon order of creation: first created -> highest priority.
