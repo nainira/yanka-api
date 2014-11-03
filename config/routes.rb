@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
   root 'static_pages#home'
   resources :cars
+
+  get '*unmatched_route', :to => 'application#raise_not_found!'
+  # match '(errors)/:status', to: 'errors#show', constraints: { status: /\d{3}/ }, via: [:get, :post]
   # get http://api.myapp.com/v1/cars
   # constraints :subdomain => 'api' do
   #   namespace :api, path: nil, defaults: { format: 'json' } do
