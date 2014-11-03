@@ -6,7 +6,7 @@ class ListingCarsTest < ActionDispatch::IntegrationTest
     Car.create!(number: '12허1234')
   end
   test 'listing cars' do
-    get '/cars'
+    get '/cars', {} , { 'Accept' => 'application/json' }
 
     assert_equal 200, response.status
     assert_equal Mime::JSON, response.content_type
@@ -15,7 +15,7 @@ class ListingCarsTest < ActionDispatch::IntegrationTest
   end
 
   test 'searching cars with number' do
-    get '/cars?search=58'
+    get '/cars?search=58', {} , { 'Accept' => 'application/json' }
 
     assert_equal 200, response.status
     assert_equal Mime::JSON, response.content_type
