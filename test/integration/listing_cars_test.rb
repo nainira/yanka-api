@@ -7,9 +7,19 @@ class ListingCarsTest < ActionDispatch::IntegrationTest
   end
   test 'listing cars' do
     get '/cars'
-    assert_equal Mime::JSON, response.content_type
+
     assert_equal 200, response.status
+    assert_equal Mime::JSON, response.content_type
 
     assert_equal Car.count, JSON.parse(response.body).size
+  end
+
+  test 'searching cars with number' do
+    get '/cars?search=58'
+
+    assert_equal 200, response.status
+    assert_equal Mime::JSON, response.content_type
+
+    assert_equal 1, JSON.parse(response.body).size
   end
 end
