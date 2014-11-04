@@ -15,4 +15,18 @@ class CarsController < ApplicationController
       render json: [], status: 404
     end
   end
+
+  def create
+    car = Car.new(car_params)
+    if car.save
+      render json: car, status: 201, location: car
+    else
+      render json: car.errors, status: 422
+    end
+  end
+
+
+  def car_params
+    params.require(:car).permit(:number)
+  end
 end
