@@ -25,8 +25,14 @@ class CarsController < ApplicationController
     end
   end
 
-
-  def car_params
-    params.require(:car).permit(:number)
+  def destroy
+    car = Car.find(params[:id])
+    car.destroy!
+    render nothing: true, status: 204
   end
+
+  private
+    def car_params
+      params.require(:car).permit(:number)
+    end
 end

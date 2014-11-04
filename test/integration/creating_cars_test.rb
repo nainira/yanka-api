@@ -11,11 +11,22 @@ class CreatingCarsTest < ActionDispatch::IntegrationTest
       { 'Accept' => 'applicatoin/json',
         'Content-type' => 'application/json' }
 
+
+
     assert_equal 201, response.status
     assert_equal Mime::JSON, response.content_type
     car = json(response.body)
+    cars = Car.all
     assert_equal car_url(car[:id]), response.location
     assert_equal '12가1888', car[:number]
+    assert_equal 2, cars.size
+
+    post '/cars', { car: {
+        number: '12가2222'
+      } }.to_json,
+      { 'Accept' => 'applicatoin/json',
+        'Content-type' => 'application/json' }
+    assert_equal 3, cars.size
   end
 
   test 'does not create cars with invalid data' do
