@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   root 'static_pages#home'
-  resources :cars
+  resources :cars do
+    resources :comments, only: [:index, :create, :destroy]
+  end
 
   get '*unmatched_route', :to => 'application#raise_not_found!'
   # match '(errors)/:status', to: 'errors#show', constraints: { status: /\d{3}/ }, via: [:get, :post]

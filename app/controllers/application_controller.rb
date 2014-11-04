@@ -17,8 +17,9 @@ class ApplicationController < ActionController::Base
   #render 500 error
   def render_error(e)
     respond_to do |f|
-      f.html{ render :template => "errors/500", :status => 500 }
-      f.js{ render :partial => "errors/ajax_500", :status => 500 }
+      # f.html{ render :template => "errors/500", :status => 500 }
+      f.html{ redirect_to root_url }
+      # f.js{ render :partial => "errors/ajax_500", :status => 500 }
       f.json { render json: { text:'500json' }, status: 500}
     end
   end
@@ -26,8 +27,9 @@ class ApplicationController < ActionController::Base
   #render 404 error
   def render_not_found(e)
     respond_to do |f|
-      f.html{ render :template => "errors/404", :status => 404 }
-      f.js{ render :partial => "errors/ajax_404", :status => 404 }
+      # f.html{ render :template => "errors/404", :status => 404 }
+      f.html{ redirect_to root_url }
+      # f.js{ render :partial => "errors/ajax_404", :status => 404 }
       f.json { render json: { text:'404json' }, status: 404}
     end
   end

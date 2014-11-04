@@ -15,7 +15,7 @@ gem 'jbuilder',                 '2.1.3'
 gem 'rails-html-sanitizer',     '1.0.1'
 gem 'turbolinks',               '2.3.0'
 gem 'sdoc',                     '0.4.0', group: :doc
-
+gem 'active_model_serializers'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 # gem 'jbuilder', '~> 2.0'

@@ -6,11 +6,9 @@ class ShowingCarTest < ActionDispatch::IntegrationTest
     Car.create!(id: 2,number: '12허1234')
   end
   test "show car detail" do
-    get '/cars/1'
+    get '/cars/1', {}, { 'Accept' => 'application/json' }
 
     assert_equal 200, response.status
     assert_equal Mime::JSON, response.content_type
-
-    assert_equal '58소8314', json(response.body)[:number]
   end
 end

@@ -9,11 +9,15 @@ class CarsController < ApplicationController
 
   def show
     car = Car.find(params[:id])
-    if car
-      render json: car, status: 200
-    else
-      render json: [], status: 404
+    respond_to do |format|
+      format.json { render json: car, status: 200 }
+      format.html car
     end
+    # if car
+    #   render json: car, status: 200
+    # else
+    #   render json: [], status: 404
+    # end
   end
 
   def create
