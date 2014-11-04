@@ -1,18 +1,19 @@
 class CommentsController < ApplicationController
   def index
     car = Car.find(params[:car_id])
-    comments = car.comments.all
+    comments = car.comments
     render json: comments, status: 200
   end
 
   # def show
-  #   car = Car.find(params[:car_id])
-  #   comment = car.comment.find[:comment_id]
+  #   car = Car.find(params[:id])
+  #   comment = car.comments.all
+  #   render json: comment
   # end
 
   def create
     car = Car.find(params[:car_id])
-    comment = car.comments.create(comment_params)
+    comment = car.comments.build(comment_params)
     if comment.save
       render json: comment, status: 201
     else
