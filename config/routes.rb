@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
   root 'static_pages#home'
+  resources :cars do
+    resources :comments, only: [:index, :create, :destroy]
+  end
 
+  get '*unmatched_route', :to => 'application#raise_not_found!'
+  # match '(errors)/:status', to: 'errors#show', constraints: { status: /\d{3}/ }, via: [:get, :post]
   # get http://api.myapp.com/v1/cars
   # constraints :subdomain => 'api' do
   #   namespace :api, path: nil, defaults: { format: 'json' } do
@@ -11,13 +16,13 @@ Rails.application.routes.draw do
   # end
 
   # get http://api.myapp.com/v1/events/
-  constraints subdomain: 'api' do
-    scope module: 'api' do
-      namespace :v1 do
-        resources :events
-      end
-    end
-  end
+  # constraints subdomain: 'api' do
+  #   scope module: 'api' do
+  #     namespace :v1 do
+  #       resources :events
+  #     end
+  #   end
+  # end
 
   # controller should be ..
 #   app/controllers/
@@ -33,7 +38,7 @@ Rails.application.routes.draw do
 #   class ApiController < ApplicationController
 #     # Generic API stuff here
 #   end
-# end  
+# end
 
 # app/controllers/api/v1/events_controller.rb
 # module Api::V1
@@ -46,7 +51,7 @@ Rails.application.routes.draw do
 # end
 
 
-  
+
 
 
   # The priority is based upon order of creation: first created -> highest priority.
