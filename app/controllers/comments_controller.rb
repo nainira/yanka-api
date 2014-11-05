@@ -4,7 +4,6 @@ class CommentsController < ApplicationController
     comments = car.comments
     render json: comments, status: 200
   end
-
   # def show
   #   car = Car.find(params[:id])
   #   comment = car.comments.all
