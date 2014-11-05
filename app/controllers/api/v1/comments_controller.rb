@@ -25,9 +25,9 @@ module Api
         # end
       end
 
-      def destroy
+      # def destroy
 
-      end
+      # end
 
       private
         def comment_params
