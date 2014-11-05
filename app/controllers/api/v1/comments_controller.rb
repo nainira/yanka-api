@@ -25,9 +25,11 @@ module Api
         # end
       end
 
+<<<<<<< HEAD
       # def destroy
 
       # end
+=======
 
       private
         def comment_params
