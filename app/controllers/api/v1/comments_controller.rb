@@ -18,18 +18,13 @@ module Api
           render json: comment, status: 201
         else
           render json: comment.errors, status: 422
+          # 422 : Unprocessable Entity
         end
         # response_to do |format|
         #   format.json { render json: comment, status: 200 }
         #   format.html comment
         # end
       end
-
-<<<<<<< HEAD
-      # def destroy
-
-      # end
-=======
 
       private
         def comment_params

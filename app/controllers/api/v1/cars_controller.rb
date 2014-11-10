@@ -2,11 +2,14 @@ module Api
   module V1
     class CarsController < ApplicationController
       def index
-        cars = Car.all
-        if search = params[:search]
+        search = params[:search]
+        if search.blank?
+          raise ActionController::RoutingError.new("No route matches #{params[:unmatched_route]}")
+        else
+          cars = Car.all
           cars = cars.where('number iLIKE ?', "%#{search}%")
+          render json: cars, status: 200
         end
-        render json: cars, status: 200
       end
 
       def show

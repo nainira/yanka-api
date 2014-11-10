@@ -6,6 +6,7 @@ Rails.application.routes.draw do
       end
     end
   end
+  get '*unmatched_route', :to => 'application#raise_not_found!'
   root 'static_pages#home'
   # constraints :subdomain => 'api' do
   #   scope module: 'api' do
@@ -16,7 +17,6 @@ Rails.application.routes.draw do
   #     end
   #   end
   # end
-  # get '*unmatched_route', :to => 'application#raise_not_found!'
   # match '(errors)/:status', to: 'errors#show', constraints: { status: /\d{3}/ }, via: [:get, :post]
   # get http://api.myapp.com/v1/cars
   # constraints :subdomain => 'api' do

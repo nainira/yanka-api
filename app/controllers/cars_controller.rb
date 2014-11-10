@@ -1,17 +1,24 @@
 class CarsController < ApplicationController
   def index
     cars = Car.all
-    if search = params[:search]
+    search = params[:search]
+    if search.nil?
+      render nil, status: 422
+    else
       cars = cars.where('number iLIKE ?', "%#{search}%")
+      render json: cars, status: 200
     end
-    render json: cars, status: 200
   end
 
   def show
     car = Car.find(params[:id])
-    respond_to do |format|
-      format.json { render json: car, status: 200 }
-      format.html car
+    if params[:id]
+      respond_to do |format|
+        format.json { render json: car, status: 200 }
+        format.html car
+      end
+    else
+      render nil, status: 404
     end
     # if car
     #   render json: car, status: 200
