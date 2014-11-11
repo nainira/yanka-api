@@ -2,12 +2,14 @@ class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
-  protect_from_forgery with: :null_session, if: Proc.new { |c| c.request.format.json? }
+  protect_from_forgery with: :null_session, if: Proc.new { |c| c.request.format == 'application/json' }
+  # protect_from_forgery with: :null_session, if: Proc.new { |c| c.request.format.json? }
 
   unless Rails.application.config.consider_all_requests_local
     rescue_from Exception, :with => :render_error
     rescue_from ActiveRecord::RecordNotFound, :with => :record_not_found
     rescue_from ActionController::RoutingError, :with => :render_not_found
+    rescue_from JSON::ParserError, :with => :render_json_error
   end
 
   def raise_not_found!
@@ -47,6 +49,16 @@ class ApplicationController < ActionController::Base
       f.json { render json: { error_message:'404 - Record not Found' }, status: 404 }
     end
   end
+
+  def render_json_error(e)
+    respond_to do |f|
+      # f.html{ render :template => "errors/404", :status => 404 }
+      # f.html{ redirect_to root_url }
+      # f.js{ render :partial => "errors/ajax_404", :status => 404 }
+      f.json { render json: { error_message:'JSON parse error' }, status: 412 }
+    end
+  end
+
 end
 
 # HTTP Status Codes

@@ -26,7 +26,7 @@ class Api::V1::CarsController < ApplicationController
   def create
     car = Car.new(car_params)
     if car.save
-      render json: car, status: 201, location: car
+      render json: car, status: 201
     else
       render json: car.errors, status: 422
     end
