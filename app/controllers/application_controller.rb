@@ -22,7 +22,7 @@ class ApplicationController < ActionController::Base
       # f.html{ render :template => "errors/500", :status => 500 }
       # f.html{ redirect_to root_url }
       # f.js{ render :partial => "errors/ajax_500", :status => 500 }
-      f.json { render json: { text: '500 - Internal Server Error' }, status: 500 }
+      f.json { render json: { error_message: '500 - Internal Server Error' }, status: 500 }
     end
   end
 
@@ -34,7 +34,7 @@ class ApplicationController < ActionController::Base
       # f.html{ render :template => "errors/404", :status => 404 }
       # f.html{ redirect_to root_url }
       # f.js{ render :partial => "errors/ajax_404", :status => 404 }
-      f.json { render json: { text:'404 - invalid URI' }, status: 404 }
+      f.json { render json: { error_message:'404 - invalid URI' }, status: 404 }
     end
   end
 
@@ -44,7 +44,7 @@ class ApplicationController < ActionController::Base
       # f.html{ render :template => "errors/404", :status => 404 }
       # f.html{ redirect_to root_url }
       # f.js{ render :partial => "errors/ajax_404", :status => 404 }
-      f.json { render json: { text:'404 - Record not Found' }, status: 404 }
+      f.json { render json: { error_message:'404 - Record not Found' }, status: 404 }
     end
   end
 end
